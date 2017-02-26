@@ -33,7 +33,7 @@ class User:
     def checkLogin(self):
         if self.isLoggedIn == true:
             return true
-        else
+        else:
             return false
     
     def logout(self):
