@@ -43,6 +43,9 @@ class User:
         cur = self.db.cursor()
         select_stmt = "select username,password from user_auth \
                         where username=\"{0}\""
+        self.username = input("Enter a username: ")
+        self.password = input("Enter a password: ")
+        self.id = input("Enter you student ID number: ")
         if self.isLoggedIn == True:
             print("User is already logged in!!")
         
@@ -50,9 +53,6 @@ class User:
             print("User already registered")
 
         else:
-            self.username = input("Enter a username: ")
-            self.password = input("Enter a password: ")
-            self.id = input("Enter you student ID number: ")
             insert_stmt = "insert into user_auth (username, password, id) \
                            values(\"{0}\", \"{1}\", {2})"
 
