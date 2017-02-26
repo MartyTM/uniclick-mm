@@ -80,25 +80,25 @@ if __name__ == "__main__":
             print("1 - Login \n 2 - Check Login Status \n 3 - Register")
             print("4 - Logout \n 5 - Start a New Session \n 6 - Close Session")
             opt = input("Select an Option: ")
-            if opt = 1:
+            if opt == 1:
                 print("User login...")
                 users(session).login()
-            elif opt = 2:
+            elif opt == 2:
                 print("Checking user login...")
                 if users(session).checkLogin():
                     print("User is Logged in!")
                 else
                     print("User is NOT Logged in!")
-            elif opt = 3:
+            elif opt == 3:
                 print("User registration...")
                 user(session).register()
-            elif opt = 4:
+            elif opt == 4:
                 print("Logging out")
                 user(session).logout()
-            elif opt = 5:
+            elif opt == 5:
                 print("Opening new session...")
                 session += 1
-            elif opt = 6:
+            elif opt == 6:
                 print("Closing session...")
                 session -= 1
                 del users(session)
