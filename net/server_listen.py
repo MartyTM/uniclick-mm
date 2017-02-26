@@ -9,7 +9,7 @@ class User:
         self.username = uname
         self.password = pword
         self.db = db
-        userCount += 1
+        self.userCount += 1
 
     def login(self):
         if self.isLoggedIn == True:
@@ -60,7 +60,7 @@ class User:
             self.db.commit()
 
     def __del__(self):
-        userCount -= 1
+        self.userCount -= 1
 
 
 
