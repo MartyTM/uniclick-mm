@@ -39,7 +39,7 @@ class User:
     def logout(self):
         self.isLoggedIn == False
                 
-    def register(self, db):
+    def register(self):
         cur = self.db.cursor()
         select_stmt = "select username,password from user_auth \
                         where username=\"{0}\""
