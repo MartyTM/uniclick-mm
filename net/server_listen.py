@@ -100,8 +100,8 @@ if __name__ == "__main__":
             session += 1
         elif opt == '6':
             print("Closing session...")
-            session -= 1
             del users[session]
+            session -= 1
             if session < 0:
                 break
         else:
