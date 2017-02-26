@@ -84,15 +84,26 @@ if __name__ == "__main__":
                 print("User login...")
                 users(session).login()
             elif opt = 2:
+                print("Checking user login...")
                 if users(session).checkLogin():
                     print("User is Logged in!")
                 else
                     print("User is NOT Logged in!")
             elif opt = 3:
+                print("User registration...")
                 user(session).register()
             elif opt = 4:
+                print("Logging out")
+                user(session).logout()
             elif opt = 5:
-            else:
+                print("Opening new session...")
+                session += 1
+            elif opt = 6:
+                print("Closing session...")
+                session -= 1
+                del users(session)
+            else
+                print("Invalid input!!")
 
     
     db.close()
