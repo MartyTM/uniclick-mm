@@ -46,8 +46,8 @@ class User:
         if self.isLoggedIn == True:
             print("User is already logged in!!")
         
-        #elif cur.execute(select_stmt.format(self.username)) != 1:
-        #    print("User already registered")
+        elif cur.execute(select_stmt.format(self.username)) == 1:
+            print("User already registered")
 
         else:
             self.username = input("Enter a username: ")
@@ -70,42 +70,41 @@ if __name__ == "__main__":
     db = MySQLdb.connect(host="localhost", user="uniclick", 
                         passwd="bluepolo", db="uniclick")
     
+    print("Welcome to the UniClick login page")
     while(1):
-    # Main menu 
-        print("Welcome to the UniClick login page")
-        while(1):
-            users.append(User(db))
-            print("You are session number: " + str(session))
-            print("What would you like to do?")
-            print("1 - Login \n 2 - Check Login Status \n 3 - Register")
-            print("4 - Logout \n 5 - Start a New Session \n 6 - Close Session")
-            opt = input("Select an Option: ")
-            if opt == '1':
-                print("User login...")
-                users[session].login()
-            elif opt == '2':
-                print("Checking user login...")
-                if users[session].checkLogin():
-                    print("User is Logged in!")
-                else:
-                    print("User is NOT Logged in!")
-            elif opt == '3':
-                print("User registration...")
-                users[session].register()
-            elif opt == '4':
-                print("Logging out")
-                users[session].logout()
-            elif opt == '5':
-                print("Opening new session...")
-                session += 1
-            elif opt == '6':
-                print("Closing session...")
-                session -= 1
-                del users[session]
-                if session < 0:
-                    break
+        users.append(User(db))
+        print("You are session number: " + str(session))
+        print("What would you like to do?")
+        print("1 - Login\n2 - Check Login Status\n3 - Register")
+        print("4 - Logout\n5 - Start a New Session\n6 - Close Session\n")
+        opt = input("Select an Option: ")
+        print("\n")
+        if opt == '1':
+            print("User login...")
+            users[session].login()
+        elif opt == '2':
+            print("Checking user login...")
+            if users[session].checkLogin():
+                print("User is Logged in!")
             else:
-                print("Invalid input!!")
+                print("User is NOT Logged in!")
+        elif opt == '3':
+            print("User registration...")
+            users[session].register()
+        elif opt == '4':
+            print("Logging out")
+            users[session].logout()
+        elif opt == '5':
+            print("Opening new session...")
+            session += 1
+        elif opt == '6':
+            print("Closing session...")
+            session -= 1
+            del users[session]
+            if session < 0:
+                break
+        else:
+            print("Invalid input!!")
 
     
     db.close()
