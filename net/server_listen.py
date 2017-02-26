@@ -82,26 +82,26 @@ if __name__ == "__main__":
             opt = input("Select an Option: ")
             if opt == '1':
                 print("User login...")
-                users(session).login()
+                users[session].login()
             elif opt == '2':
                 print("Checking user login...")
-                if users(session).checkLogin():
+                if users[session].checkLogin():
                     print("User is Logged in!")
                 else:
                     print("User is NOT Logged in!")
             elif opt == '3':
                 print("User registration...")
-                users(session).register()
+                users[session].register()
             elif opt == '4':
                 print("Logging out")
-                users(session).logout()
+                users[session].logout()
             elif opt == '5':
                 print("Opening new session...")
                 session += 1
             elif opt == '6':
                 print("Closing session...")
                 session -= 1
-                #del users.pop(session)
+                del users[session]
             else:
                 print("Invalid input!!")
 
