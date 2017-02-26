@@ -5,14 +5,14 @@ class User:
 
     # Might be better to init uname and pword to None type
     def __init__(self, db, uname=None, pword=None):
-        self.isLoggedIn = false
+        self.isLoggedIn = False
         self.username = uname
         self.password = pword
         self.db = db
         userCount += 1
 
     def login(self):
-        if self.isLoggedIn == true:
+        if self.isLoggedIn == True:
             print("User is already logged in!!")
         
         else:
@@ -28,22 +28,22 @@ class User:
                     print("Password is incorrect!!")
                 elif self.password == password:
                     print("Logged in as user: " + username)
-                    self.isLoggedIn = true
+                    self.isLoggedIn = True
     
     def checkLogin(self):
-        if self.isLoggedIn == true:
-            return true
+        if self.isLoggedIn == True:
+            return True
         else:
-            return false
+            return False
     
     def logout(self):
-        self.isLoggedIn == false
+        self.isLoggedIn == False
                 
     def register(self, db):
         cur = self.db.cursor()
         select_stmt = "select username,password from user_auth \
                         where username=\"{0}\""
-        if self.isLoggedIn == true:
+        if self.isLoggedIn == True:
             print("User is already logged in!!")
         
         elif cur.execute(select_stmt.format(self.username)) != 1:
@@ -60,7 +60,7 @@ class User:
             self.db.commit()
 
     def __del__(self):
-        usercount -= 1
+        userCount -= 1
 
 
 
