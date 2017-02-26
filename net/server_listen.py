@@ -86,6 +86,7 @@ if __name__ == "__main__":
             print("Checking user login...")
             if users[session].checkLogin():
                 print("User is Logged in!")
+                print("Logged in as user: " + users[session].username)
             else:
                 print("User is NOT Logged in!")
         elif opt == '3':
