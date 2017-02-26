@@ -46,8 +46,8 @@ class User:
         if self.isLoggedIn == True:
             print("User is already logged in!!")
         
-        elif cur.execute(select_stmt.format(self.username)) != 1:
-            print("User already registered")
+        #elif cur.execute(select_stmt.format(self.username)) != 1:
+        #    print("User already registered")
 
         else:
             self.username = input("Enter a username: ")
@@ -102,6 +102,8 @@ if __name__ == "__main__":
                 print("Closing session...")
                 session -= 1
                 del users[session]
+                if session < 0:
+                    break
             else:
                 print("Invalid input!!")
 
