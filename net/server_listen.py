@@ -91,17 +91,17 @@ if __name__ == "__main__":
                     print("User is NOT Logged in!")
             elif opt == 3:
                 print("User registration...")
-                user(session).register()
+                users(session).register()
             elif opt == 4:
                 print("Logging out")
-                user(session).logout()
+                users(session).logout()
             elif opt == 5:
                 print("Opening new session...")
                 session += 1
             elif opt == 6:
                 print("Closing session...")
                 session -= 1
-                del users(session)
+                #del users.pop(session)
             else:
                 print("Invalid input!!")
 
