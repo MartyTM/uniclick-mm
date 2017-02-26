@@ -31,13 +31,13 @@ class User:
                     self.isLoggedIn = true
     
     def checkLogin(self):
-        if self.isLoggedIn = true:
+        if self.isLoggedIn == true:
             return true
         else
             return false
     
     def logout(self):
-        self.isLoggedIn = false
+        self.isLoggedIn == false
                 
     def register(self, db):
         cur = self.db.cursor()
