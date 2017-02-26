@@ -102,7 +102,7 @@ if __name__ == "__main__":
                 print("Closing session...")
                 session -= 1
                 del users(session)
-            else
+            else:
                 print("Invalid input!!")
 
     
