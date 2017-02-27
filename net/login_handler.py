@@ -1,5 +1,6 @@
 import MySQLdb
 
+
 class User:
     userCount = 0
 
@@ -12,9 +13,9 @@ class User:
         self.userCount += 1
 
     def login(self):
-        if self.isLoggedIn == True:
+        if self.isLoggedIn is True:
             print("User is already logged in!!")
-        
+
         else:
             self.username = input("Enter a username: ")
             self.password = input("Enter a password: ")
@@ -22,23 +23,23 @@ class User:
             select_stmt = "select username,password from user_auth \
                            where username=\"{0}\""
             cur.execute(select_stmt.format(self.username))
-            
+
             for username, password in cur.fetchall():
                 if self.password != password:
                     print("Password is incorrect!!")
                 elif self.password == password:
                     print("Logged in as user: " + username)
                     self.isLoggedIn = True
-    
+
     def checkLogin(self):
-        if self.isLoggedIn == True:
+        if self.isLoggedIn is True:
             return True
         else:
             return False
-    
+
     def logout(self):
-        self.isLoggedIn == False
-                
+        self.isLoggedIn = False
+
     def register(self):
         cur = self.db.cursor()
         select_stmt = "select username,password from user_auth \
@@ -46,9 +47,9 @@ class User:
         self.username = input("Enter a username: ")
         self.password = input("Enter a password: ")
         self.id = input("Enter you student ID number: ")
-        if self.isLoggedIn == True:
+        if self.isLoggedIn is True:
             print("User is already logged in!!")
-        
+
         elif cur.execute(select_stmt.format(self.username)) == 1:
             print("User already registered")
 
@@ -56,20 +57,20 @@ class User:
             insert_stmt = "insert into user_auth (username, password, id) \
                            values(\"{0}\", \"{1}\", {2})"
 
-            cur.execute(insert_stmt.format(self.username, self.password, self.id))
+            cur.execute(insert_stmt.format(
+                        self.username, self.password, self.id))
             self.db.commit()
 
     def __del__(self):
         self.userCount -= 1
 
 
-
 if __name__ == "__main__":
     users = []
     session = 0
-    db = MySQLdb.connect(host="localhost", user="uniclick", 
-                        passwd="bluepolo", db="uniclick")
-    
+    db = MySQLdb.connect(host="localhost", user="uniclick",
+                         passwd="bluepolo", db="uniclick")
+
     print("Welcome to the UniClick login page")
     while(1):
         users.append(User(db))
@@ -107,6 +108,5 @@ if __name__ == "__main__":
         else:
             print("Invalid input!!")
 
-    
     db.close()
 
