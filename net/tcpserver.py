@@ -12,8 +12,7 @@ class TCP_handler(socketserver.BaseRequestHandler):
 
 if __name__ == "__main__":
     host = socket.gethostbyname(socket.gethostname())
-    print(host)
     port = 8080
 
-    with socketserver.TCPServer((host, port), TCP_handler) as server:
-        server.serve_forever()
+    server = socketserver.TCPServer((host, port), TCP_handler)
+    server.serve_forever()
