@@ -5,7 +5,8 @@ class TCP_handler(socketserver.BaseRequestHandler):
     def handle(self):
         self.data = self.request.recv(1024).strip()
         print("{} wrote:".format(self.client_address[0]))
-        print(str(self.data))
+        data_str = self.data.decode("utf-8/")
+        print(data_str)
         self.request.sendall(self.data.upper())
 
 
