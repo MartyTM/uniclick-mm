@@ -68,7 +68,7 @@ class User:
 
 class TCP_handler(socketserver.BaseRequestHandler):
     def handle(self):
-        self.request.sendall("Enter an option: ")
+        self.request.sendall(bytes("Enter an option: ", 'utf-8'))
         self.data = self.request.recv(1024).strip()
         print("{} wrote:".format(self.client_address[0]))
         data_str = self.data.decode("utf-8/")
