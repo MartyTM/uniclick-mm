@@ -78,6 +78,7 @@ class TCP_handler(socketserver.BaseRequestHandler):
         TCP_handler.session += 1
         print(self.session)
         print(TCP_handler.session)
+        print(TCP_handler.users)
 
     def handle(self):
         self.data = self.request.recv(1024).strip()
