@@ -6,12 +6,12 @@ host, port = "45.55.163.153", 8080
 
 try:
     sock.connect((host, port))
-    sock.sendall(data + "\n")
+    sock.sendall(data.encode('utf-8'))
     received = sock.recv(1024)
 finally:
     sock.close()
 
 print("Sent:    {}".format(data))
-print("Received:{}".format(received))
+print("Received:{}".format(received.decode('utf-8')))
 
 
