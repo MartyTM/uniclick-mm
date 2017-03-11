@@ -1,7 +1,7 @@
 import socket
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-data = "test\n"
+data = "test"
 host, port = "45.55.163.153", 8080
 
 try:
