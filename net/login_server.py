@@ -1,7 +1,7 @@
 import MySQLdb
 import socketserver
 
-"""
+
 class User:
     userCount = 0
 
@@ -13,7 +13,7 @@ class User:
         self.db = db
         self.userCount += 1
 
-    def login(self):
+    def login(self, uname, pword):
         if self.isLoggedIn is True:
             print("User is already logged in!!")
 
@@ -64,24 +64,46 @@ class User:
 
     def __del__(self):
         self.userCount -= 1
-"""
+
 
 class TCP_handler(socketserver.BaseRequestHandler):
+    users = []
+    session = 0
+
+    def __init__(self):
+        db = MySQLdb.connect(host="localhost", user="uniclick",
+                             passwd="bluepolo", db="uniclick")
+        self.session = TCP_handler.session
+        TCP_handler.users.append(User(db))
+        TCP_handler.session += 1
+
     def handle(self):
         self.request.sendall(bytes("Enter an option: ", 'utf-8'))
         self.data = self.request.recv(1024).strip()
         print("{} wrote:".format(self.client_address[0]))
-        data_str = self.data.decode("utf-8/")
+        data_str = self.data.decode("utf-8")
+        if data_str == "LOGIN":
+            self.request.sendall(bytes("Enter your username: ", 'utf-8'))
+            self.uname = self.request.recv(1024).strip().decode("utf-8")
+            self.request.sendall(bytes("Enter your password: ", 'utf-8'))
+            self.pword = self.request.recv(1024).strip().decode("utf-8")
+            TCP_handler.users[self.session].login(self.uname, self.pword)
+            """
+            elif data_str == "RGSTR":
+            elif data_str == "CHKLG":
+            elif data_str == "LGOUT":
+            """
+        else:
+            print("Invalid Input!!")
         print(data_str)
         self.request.sendall(self.data.upper())
+
+        def __del__(self):
+            del TCP_handler.users[self.session]
 
 
 if __name__ == "__main__":
     host, port = "45.55.163.153", 8080
-    users = []
-    session = 0
-    db = MySQLdb.connect(host="localhost", user="uniclick",
-                         passwd="bluepolo", db="uniclick")
     server = socketserver.TCPServer((host, port), TCP_handler)
     server.serve_forever()
 
