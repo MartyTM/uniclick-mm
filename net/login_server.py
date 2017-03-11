@@ -70,7 +70,7 @@ class TCP_handler(socketserver.BaseRequestHandler):
     users = []
     session = 0
 
-    def __init__(self):
+    def __init__(self, request, client_address, server):
         db = MySQLdb.connect(host="localhost", user="uniclick",
                              passwd="bluepolo", db="uniclick")
         self.session = TCP_handler.session
