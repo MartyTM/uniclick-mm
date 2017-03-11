@@ -69,7 +69,7 @@ class User:
 class TCP_handler(socketserver.BaseRequestHandler):
     users = []
     session = 0
-
+    '''
     def __init__(self, request, client_address, server):
         db = MySQLdb.connect(host="localhost", user="uniclick",
                              passwd="bluepolo", db="uniclick")
@@ -79,7 +79,7 @@ class TCP_handler(socketserver.BaseRequestHandler):
         print(self.session)
         print(TCP_handler.session)
         print(TCP_handler.users)
-
+        '''
     def handle(self):
         self.data = self.request.recv(1024).strip()
         print("{} wrote:".format(self.client_address[0]))
