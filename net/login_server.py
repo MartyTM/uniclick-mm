@@ -78,7 +78,7 @@ class TCP_handler(socketserver.BaseRequestHandler):
         TCP_handler.session += 1
 
     def handle(self):
-        self.request.sendall(bytes("Enter an option: ", 'utf-8'))
+        self.request.sendall(bytes("Connected, enter a cmd: ", 'utf-8'))
         self.data = self.request.recv(1024).strip()
         print("{} wrote:".format(self.client_address[0]))
         data_str = self.data.decode("utf-8")
