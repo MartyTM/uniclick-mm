@@ -78,29 +78,13 @@ class TCP_handler(socketserver.BaseRequestHandler):
         TCP_handler.session += 1
 
     def handle(self):
-        print(self.request.recv(1024).strip().decode("utf-8"))
-        self.request.sendall(bytes("Connected, enter a cmd: ", 'utf-8'))
         self.data = self.request.recv(1024).strip()
         print("{} wrote:".format(self.client_address[0]))
-        data_str = self.data.decode("utf-8")
-        if data_str == "LOGIN":
-            self.request.sendall(bytes("Enter your username: ", 'utf-8'))
-            self.uname = self.request.recv(1024).strip().decode("utf-8")
-            self.request.sendall(bytes("Enter your password: ", 'utf-8'))
-            self.pword = self.request.recv(1024).strip().decode("utf-8")
-            TCP_handler.users[self.session].login(self.uname, self.pword)
-            """
-            elif data_str == "RGSTR":
-            elif data_str == "CHKLG":
-            elif data_str == "LGOUT":
-            """
-        else:
-            print("Invalid Input!!")
-        print(data_str)
+        print(self.data)
         self.request.sendall(self.data.upper())
 
-        def __del__(self):
-            del TCP_handler.users[self.session]
+    def __del__(self):
+        del TCP_handler.users[self.session]
 
 
 if __name__ == "__main__":
