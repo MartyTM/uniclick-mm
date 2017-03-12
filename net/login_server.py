@@ -91,10 +91,10 @@ class TCP_handler(socketserver.BaseRequestHandler):
         print(data_str)
         self.request.sendall(self.data.upper())
         if data_str == "LOGIN":
-            username = self.request.recv(1024).strip()
+            username = self.request.recv(1024).strip().decode("utf-8")
             print(username)
             self.request.sendall(username.upper())
-            password = self.request.recv(1024).strip()
+            password = self.request.recv(1024).strip().decode("utf-8")
             print(password)
             self.request.sendall(password.upper())
             TCP_handler.users[self.client_address].login(username, password)
