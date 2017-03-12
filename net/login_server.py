@@ -95,6 +95,10 @@ class TCP_handler(socketserver.BaseRequestHandler):
             password = self.request.recv(1024).strip()
             self.request.sendall(password.upper())
             TCP_handler.users[self.client_address].login(username, password)
+            if TCP_handler.users[self.client_address].isLoggedIn is True:
+                print("Login successful")
+            else:
+                print("Login unsuccessful")
         else:
             pass
 
