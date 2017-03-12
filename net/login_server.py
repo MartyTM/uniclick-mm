@@ -67,8 +67,7 @@ class User:
 
 
 class TCP_handler(socketserver.BaseRequestHandler):
-    users = []
-    session = 0
+    users = {}
 
     def __init__(self, request, client_address, server):
         self.request = request
@@ -78,11 +77,7 @@ class TCP_handler(socketserver.BaseRequestHandler):
 
         db = MySQLdb.connect(host="localhost", user="uniclick",
                              passwd="bluepolo", db="uniclick")
-        self.session = TCP_handler.session
-        TCP_handler.users.append(User(db))
-        TCP_handler.session += 1
-        print(self.session)
-        print(TCP_handler.session)
+        TCP_handler.users.update({self.client_address: User(db)})
         print(TCP_handler.users)
 
         try:
