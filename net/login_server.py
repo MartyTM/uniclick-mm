@@ -75,6 +75,7 @@ class TCP_handler(socketserver.BaseRequestHandler):
         self.client_address = client_address
         self.server = server
         self.setup()
+
         db = MySQLdb.connect(host="localhost", user="uniclick",
                              passwd="bluepolo", db="uniclick")
         self.session = TCP_handler.session
@@ -83,6 +84,7 @@ class TCP_handler(socketserver.BaseRequestHandler):
         print(self.session)
         print(TCP_handler.session)
         print(TCP_handler.users)
+
         try:
             self.handle()
         finally:
@@ -94,9 +96,10 @@ class TCP_handler(socketserver.BaseRequestHandler):
         data_str = self.data.decode("utf-8/")
         print(data_str)
         self.request.sendall(self.data.upper())
-
+    '''
     def __del__(self):
         del TCP_handler.users[self.session]
+        '''
 
 
 if __name__ == "__main__":
