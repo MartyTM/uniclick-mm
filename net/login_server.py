@@ -18,8 +18,6 @@ class User:
             print("User is already logged in!!")
 
         else:
-            self.username = input("Enter a username: ")
-            self.password = input("Enter a password: ")
             cur = self.db.cursor()
             select_stmt = "select username,password from user_auth \
                            where username=\"{0}\""
@@ -88,9 +86,14 @@ class TCP_handler(socketserver.BaseRequestHandler):
     def handle(self):
         self.data = self.request.recv(1024).strip()
         print("{} wrote:".format(self.client_address[0]))
-        data_str = self.data.decode("utf-8/")
+        data_str = self.data.decode("utf-8")
         print(data_str)
-        self.request.sendall(self.data.upper())
+        if data_str == "LOGIN":
+            username = self.request.recv(1024).strip()
+            password = self.request.recv(1024).strip()
+            TCP_handler.users[self.client_addres].login(username, password)
+        else:
+            pass
 
     def finish(self):
         del TCP_handler.users[self.client_address]
