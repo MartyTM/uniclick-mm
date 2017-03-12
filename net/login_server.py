@@ -92,8 +92,10 @@ class TCP_handler(socketserver.BaseRequestHandler):
         self.request.sendall(self.data.upper())
         if data_str == "LOGIN":
             username = self.request.recv(1024).strip()
+            print(username)
             self.request.sendall(username.upper())
             password = self.request.recv(1024).strip()
+            print(password)
             self.request.sendall(password.upper())
             TCP_handler.users[self.client_address].login(username, password)
             if TCP_handler.users[self.client_address].isLoggedIn is True:
