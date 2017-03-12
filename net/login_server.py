@@ -85,27 +85,30 @@ class TCP_handler(socketserver.BaseRequestHandler):
             self.finish()
 
     def handle(self):
-        self.data = self.request.recv(1024).strip()
-        print("{} wrote:".format(self.client_address[0]))
-        data_str = self.data.decode("utf-8")
-        print(data_str)
-        self.request.sendall(self.data.upper())
-        if data_str == "LOGIN":
-            username = self.request.recv(1024).strip()
-            print(username)
-            self.request.sendall(username.upper())
-            password = self.request.recv(1024).strip()
-            print(password)
-            self.request.sendall(password.upper())
-            username = username.decode("utf-8")
-            password = password.decode("utf-8")
-            TCP_handler.users[self.client_address].login(username, password)
-            if TCP_handler.users[self.client_address].isLoggedIn is True:
-                print("Login successful")
+        while True:
+            self.data = self.request.recv(1024).strip()
+            print("{} wrote:".format(self.client_address[0]))
+            data_str = self.data.decode("utf-8")
+            print(data_str)
+            self.request.sendall(self.data.upper())
+            if data_str == "LOGIN":
+                username = self.request.recv(1024).strip()
+                print(username)
+                self.request.sendall(username.upper())
+                password = self.request.recv(1024).strip()
+                print(password)
+                self.request.sendall(password.upper())
+                username = username.decode("utf-8")
+                password = password.decode("utf-8")
+                TCP_handler.users[self.client_address].login(username, password)
+                if TCP_handler.users[self.client_address].isLoggedIn is True:
+                    print("Login successful")
+                else:
+                    print("Login unsuccessful")
+            elif data_str == "EXIT":
+                break
             else:
-                print("Login unsuccessful")
-        else:
-            pass
+                pass
 
     def finish(self):
         del TCP_handler.users[self.client_address]
