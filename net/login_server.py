@@ -91,10 +91,9 @@ class TCP_handler(socketserver.BaseRequestHandler):
         data_str = self.data.decode("utf-8/")
         print(data_str)
         self.request.sendall(self.data.upper())
-    '''
-    def __del__(self):
-        del TCP_handler.users[self.session]
-        '''
+
+    def finish(self):
+        del TCP_handler.users[self.client_address]
 
 
 if __name__ == "__main__":
