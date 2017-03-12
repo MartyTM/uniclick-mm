@@ -9,11 +9,13 @@ try:
     sock.sendall(bytes(cmd, 'utf-8'))
     received = str(sock.recv(1024), 'utf-8')
     sock.sendall(bytes("mmarshal", 'utf-8'))
+    uname_recv = str(sock.recv(1024), 'utf-8')
     sock.sendall(bytes("bluepolo", 'utf-8'))
+    pword_recv = str(sock.recv(1024), 'utf-8')
 finally:
     sock.close()
 
-print("Sent:     {}".format(data))
-print("Received: {}".format(received))
+# print("Sent:     {}".format(data))
+# print("Received: {}".format(received))
 
 
