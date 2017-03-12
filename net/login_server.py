@@ -18,11 +18,12 @@ class User:
             print("User is already logged in!!")
 
         else:
+            self.username = uname
+            self.password = pword
             cur = self.db.cursor()
             select_stmt = "select username,password from user_auth \
                            where username=\"{0}\""
             cur.execute(select_stmt.format(self.username))
-
             for username, password in cur.fetchall():
                 if self.password != password:
                     print("Password is incorrect!!")
