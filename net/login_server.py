@@ -106,6 +106,13 @@ class TCP_handler(socketserver.BaseRequestHandler):
                     print("Login successful")
                 else:
                     print("Login unsuccessful")
+            
+            if data_str == "CHKLG":
+                self.request.recv(1024).strip()
+                if TCP_handler.users[self.client_address].checkLogin() is True:
+                    self.request.sendall(bytes("TRUE", 'utf-8'))
+                else:
+                    self.request.sendall(bytes("FALSE", 'utf-8'))    
 
             if data_str == "RGSTR":
                 username = self.request.recv(1024).strip()

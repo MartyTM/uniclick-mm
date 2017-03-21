@@ -12,6 +12,7 @@ try:
         print("4 - Logout\n5 - Start a New Session\n6 - Close Session\n")
         opt = input("Select an Option: ")
         print("\n")
+
         if opt == '1':
             cmd = "LOGIN"
             username = input("Enter your username: ")
@@ -22,7 +23,21 @@ try:
             uname_recv = str(sock.recv(1024), 'utf-8')
             sock.sendall(bytes(password, 'utf-8'))
             pword_recv = str(sock.recv(1024), 'utf-8')
+
         if opt == '2':
+            cmd = "CHKLG"
+            sock.sendall(bytes(cmd, 'utf-8'))
+            received = str(sock.recv(1024), 'utf-8')
+            sock.sendall(bytes("READY", 'utf-8'))
+            login_bool = str(sock.recv(1024), 'utf-8')
+            if login_bool == "TRUE":
+                isLoggedIn = True
+                print("User is logged in")
+            if login_bool == "FALSE":
+                isLoggedIn = False
+                print("User is NOT logged in")
+
+        if opt == '3':
             cmd = "RGSTR"
             username = input("Enter your username: ")
             password = input("Enter your password: ")
@@ -35,11 +50,13 @@ try:
             pword_recv = str(sock.recv(1024), 'utf-8')
             sock.sendall(bytes(stud_id, 'utf-8'))
             id_recv = str(sock.recv(1024), 'utf-8')
+
         elif opt == '6':
             cmd = "EXIT"
             sock.sendall(bytes(cmd, 'utf-8'))
             received = str(sock.recv(1024), 'utf-8')
             break
+
         else:
             pass
 finally:
