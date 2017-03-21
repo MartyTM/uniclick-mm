@@ -22,6 +22,19 @@ try:
             uname_recv = str(sock.recv(1024), 'utf-8')
             sock.sendall(bytes(password, 'utf-8'))
             pword_recv = str(sock.recv(1024), 'utf-8')
+        if opt == '2':
+            cmd = "RGSTR"
+            username = input("Enter your username: ")
+            password = input("Enter your password: ")
+            stud_id = input("Enter your student ID number: ")
+            sock.sendall(bytes(cmd, 'utf-8'))
+            received = str(sock.recv(1024), 'utf-8')
+            sock.sendall(bytes(username, 'utf-8'))
+            uname_recv = str(sock.recv(1024), 'utf-8')
+            sock.sendall(bytes(password, 'utf-8'))
+            pword_recv = str(sock.recv(1024), 'utf-8')
+            sock.sendall(bytes(stud_id, 'utf-8'))
+            id_recv = str(sock.recv(1024), 'utf-8')
         elif opt == '6':
             cmd = "EXIT"
             sock.sendall(bytes(cmd, 'utf-8'))

@@ -40,13 +40,13 @@ class User:
     def logout(self):
         self.isLoggedIn = False
 
-    def register(self):
+    def register(self, uname, pword, ident):
         cur = self.db.cursor()
         select_stmt = "select username,password from user_auth \
                         where username=\"{0}\""
-        self.username = input("Enter a username: ")
-        self.password = input("Enter a password: ")
-        self.id = input("Enter you student ID number: ")
+        self.username = uname
+        self.password = pword
+        self.id = ident
         if self.isLoggedIn is True:
             print("User is already logged in!!")
 
@@ -60,6 +60,7 @@ class User:
             cur.execute(insert_stmt.format(
                         self.username, self.password, self.id))
             self.db.commit()
+            print("Registered user: " + uname)
 
     def __del__(self):
         self.userCount -= 1
@@ -105,6 +106,22 @@ class TCP_handler(socketserver.BaseRequestHandler):
                     print("Login successful")
                 else:
                     print("Login unsuccessful")
+
+            if data_str == "RGSTR":
+                username = self.request.recv(1024).strip()
+                print(username)
+                self.request.sendall(username.upper())
+                password = self.request.recv(1024).strip()
+                print(password)
+                self.request.sendall(password.upper())
+                stud_id = self.request.recv(1024).strip()
+                print(stud_id)
+                self.request.sendall(stud_id.upper())
+                username = username.decode("utf-8")
+                password = password.decode("utf-8")
+                stud_id = stud_id.decode("utf-8")
+                TCP_handler.users[self.client_address].register(username, password, stud_id)
+
             elif data_str == "EXIT":
                 break
             else:
