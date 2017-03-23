@@ -66,5 +66,3 @@ try:
             pass
 finally:
     sock.close()
-
-
