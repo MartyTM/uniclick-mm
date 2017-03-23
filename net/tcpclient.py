@@ -9,7 +9,7 @@ try:
     while True:
         print("What would you like to do?")
         print("1 - Login\n2 - Check Login Status\n3 - Register")
-        print("4 - Logout\n5 - Start a New Session\n6 - Close Session\n")
+        print("4 - Logout\n5 Close Session\n")
         opt = input("Select an Option: ")
         print("\n")
 
@@ -24,7 +24,7 @@ try:
             sock.sendall(bytes(password, 'utf-8'))
             pword_recv = str(sock.recv(1024), 'utf-8')
 
-        if opt == '2':
+        elif opt == '2':
             cmd = "CHKLG"
             sock.sendall(bytes(cmd, 'utf-8'))
             received = str(sock.recv(1024), 'utf-8')
@@ -37,7 +37,7 @@ try:
                 isLoggedIn = False
                 print("User is NOT logged in")
 
-        if opt == '3':
+        elif opt == '3':
             cmd = "RGSTR"
             username = input("Enter your username: ")
             password = input("Enter your password: ")
@@ -51,7 +51,12 @@ try:
             sock.sendall(bytes(stud_id, 'utf-8'))
             id_recv = str(sock.recv(1024), 'utf-8')
 
-        elif opt == '6':
+        elif opt == '4':
+            cmd = "LGOUT"
+            sock.sendall(bytes(cmd, 'utf-8'))
+            received = str(sock.recv(1024), 'utf-8')
+
+        elif opt == '5':
             cmd = "EXIT"
             sock.sendall(bytes(cmd, 'utf-8'))
             received = str(sock.recv(1024), 'utf-8')
@@ -61,8 +66,5 @@ try:
             pass
 finally:
     sock.close()
-
-# print("Sent:     {}".format(data))
-# print("Received: {}".format(received))
 
 

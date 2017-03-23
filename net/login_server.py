@@ -101,20 +101,21 @@ class TCP_handler(socketserver.BaseRequestHandler):
                 self.request.sendall(password.upper())
                 username = username.decode("utf-8")
                 password = password.decode("utf-8")
-                TCP_handler.users[self.client_address].login(username, password)
+                TCP_handler.users[
+                    self.client_address].login(username, password)
                 if TCP_handler.users[self.client_address].isLoggedIn is True:
                     print("Login successful")
                 else:
                     print("Login unsuccessful")
-            
-            if data_str == "CHKLG":
+
+            elif data_str == "CHKLG":
                 self.request.recv(1024).strip()
                 if TCP_handler.users[self.client_address].checkLogin() is True:
                     self.request.sendall(bytes("TRUE", 'utf-8'))
                 else:
-                    self.request.sendall(bytes("FALSE", 'utf-8'))    
+                    self.request.sendall(bytes("FALSE", 'utf-8'))
 
-            if data_str == "RGSTR":
+            elif data_str == "RGSTR":
                 username = self.request.recv(1024).strip()
                 print(username)
                 self.request.sendall(username.upper())
@@ -127,7 +128,11 @@ class TCP_handler(socketserver.BaseRequestHandler):
                 username = username.decode("utf-8")
                 password = password.decode("utf-8")
                 stud_id = stud_id.decode("utf-8")
-                TCP_handler.users[self.client_address].register(username, password, stud_id)
+                TCP_handler.users[
+                    self.client_address].register(username, password, stud_id)
+
+            elif data_str == "LGOUT":
+                TCP_handler.users[self.client_address].logout()
 
             elif data_str == "EXIT":
                 break
@@ -142,4 +147,3 @@ if __name__ == "__main__":
     host, port = "45.55.163.153", 8080
     server = socketserver.TCPServer((host, port), TCP_handler)
     server.serve_forever()
-
