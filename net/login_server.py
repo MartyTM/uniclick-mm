@@ -5,7 +5,6 @@ import socketserver
 class User:
     userCount = 0
 
-    # Might be better to init uname and pword to None type
     def __init__(self, db, uname=None, pword=None):
         self.isLoggedIn = False
         self.username = uname
