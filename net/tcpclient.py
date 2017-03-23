@@ -9,7 +9,7 @@ try:
     while True:
         print("What would you like to do?")
         print("1 - Login\n2 - Check Login Status\n3 - Register")
-        print("4 - Logout\n5 Close Session\n")
+        print("4 - Logout\n5 - Close Session\n")
         opt = input("Select an Option: ")
         print("\n")
 
