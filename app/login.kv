@@ -1,0 +1,54 @@
+#:include connected.kv
+#:include register.kv
+
+<Login>:
+    BoxLayout
+        id: login_layout
+        orientation: 'vertical'
+        padding: [10,50,10,50]
+        spacing: 50
+
+        Label:
+            text: 'Welcome to Uniclick'
+            font_size: 32
+
+        BoxLayout:
+            orientation: 'vertical'
+
+            Label:
+                text: 'Username'
+                font_size: 18
+                halign: 'left'
+                text_size: root.width-20, 20
+
+            TextInput:
+                id: username
+                multiline:False
+                font_size: 28
+
+        BoxLayout:
+            orientation: 'vertical'
+            Label:
+                text: 'Password'
+                halign: 'left'
+                font_size: 18
+                text_size: root.width-20, 20
+
+            TextInput:
+                id: password
+                multiline:False
+                password:True
+                font_size: 28
+        BoxLayout:
+            orientation: 'horizontal'
+            Button:
+                text: 'Login'
+                font_size: 24
+
+                on_press: root.do_login(username.text, password.text)
+            
+            Button:
+                text: 'Register'
+                font_size: 24
+
+                on_press: root.go_to_register()
